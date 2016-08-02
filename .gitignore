@@ -1,0 +1,4 @@
+node_modules/
+ios/build/Build/*
+ios/build/Logs/*
+ios/build/ModuleCache/*
