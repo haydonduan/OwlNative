@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
-import { AppRegistry,Navigator } from 'react-native';
-
-import MyScene from './MyScene';
-
-class YoDawgApp extends Component {
+import React from 'react';
+import { View, Navigator, AppRegistry } from 'react-native';
+import FirstPageComponent from './FirstPageComponent';
+export default class SampleComponent extends React.Component {
   render() {
+    let defaultName = 'FirstPageComponent';
+    let defaultComponent = FirstPageComponent;
     return (
+        <Navigator
+        initialRoute={{ name: defaultName, component: defaultComponent }}
+        configureScene={(route) => {
+          return Navigator.SceneConfigs.VerticalDownSwipeJump;
+        }}
 
-  <MyScene title="adfasdf" />
+        renderScene={(route, navigator) => {
+          let Component = route.component;
+          return <Component {...route.params} navigator={navigator} />
+        }} />
 
-  )
+        );
   }
 }
-
-AppRegistry.registerComponent('OwlNative', () => YoDawgApp);
-
+AppRegistry.registerComponent('OwlNative', () => SampleComponent);
