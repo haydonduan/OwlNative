@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  NavigatorIOS,
-  Navigator,
-  Text,
-  View,
-  TouchableHighlight,
-  StyleSheet
+  AppRegistry, NavigatorIOS, Navigator, Text, View, TouchableHighlight, StyleSheet
 } from 'react-native';
+
+import HomePage   from './homepage'
+import DetailPage from './detailpage'
+import styles     from './styles'
 
 class PageNavigator extends Component {
   render() {
@@ -25,45 +23,5 @@ class PageNavigator extends Component {
         />)
   }
 }
-
-class HomePage extends Component {
-  handleClick(props) {
-    props.navigator.push({id: 'detail'})
-  }
-  render() {
-    return(
-        <View style={styles.containerView}>
-          <TouchableHighlight onPress={this.handleClick.bind(this, this.props)}>
-            <Text>{this.props.title}</Text>
-          </TouchableHighlight>
-        </View>
-    )
-  }
-}
-
-class DetailPage extends Component {
-  handleClick(props) {
-    props.navigator.pop()
-  }
-  render() {
-    return(
-        <View style={styles.containerView}>
-          <TouchableHighlight onPress={this.handleClick.bind(this, this.props)}>
-            <Text>{this.props.title}</Text>
-          </TouchableHighlight>
-        </View>
-    )
-  }
-}
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  containerView: {
-   flex: 1,
-   justifyContent: 'center',
-  }
-})
 
 AppRegistry.registerComponent('OwlNative', () => PageNavigator);
