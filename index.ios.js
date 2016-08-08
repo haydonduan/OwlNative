@@ -22,3 +22,5 @@ export default class SampleComponent extends React.Component {
 }
 
 AppRegistry.registerComponent('OwlNative', () => SampleComponent);
+
+tsete: w
