@@ -13,7 +13,7 @@ import styles from './styles'
 
 export default class HomePage extends Component {
   handleClick(props) {
-    props.navigator.push({id: 'detail'})
+    props.navigator.push({id: 'homepage', title: 'home page'})
   }
   render() {
     return(

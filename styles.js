@@ -8,5 +8,9 @@ export default StyleSheet.create({
   containerView: {
    flex: 1,
    justifyContent: 'center',
+  },
+  navigatorBar: {
+    backgroundColor: '#a4a4a4',
+    height: 40
   }
 })
