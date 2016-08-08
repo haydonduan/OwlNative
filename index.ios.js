@@ -1,26 +1,69 @@
-import React from 'react';
-import { View, Navigator, AppRegistry } from 'react-native';
-import FirstPageComponent from './FirstPageComponent';
-export default class SampleComponent extends React.Component {
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  NavigatorIOS,
+  Navigator,
+  Text,
+  View,
+  TouchableHighlight,
+  StyleSheet
+} from 'react-native';
+
+class PageNavigator extends Component {
   render() {
-    let defaultName = 'FirstPageComponent';
-    let defaultComponent = FirstPageComponent;
-    return (
-        <Navigator
-        initialRoute={{ name: defaultName, component: defaultComponent }}
-        configureScene={(route) => {
-          return Navigator.SceneConfigs.VerticalDownSwipeJump;
-        }}
-
-        renderScene={(route, navigator) => {
-          let Component = route.component;
-          return <Component {...route.params} navigator={navigator} />
-        }} />
-
-        );
+    return(<Navigator
+        style={styles.container}
+        initialRoute={{id: 'main'}}
+        renderScene={function(route, navigator){
+            if (route.id == 'main'){
+              return <HomePage navigator={navigator} title="home page" />
+            } else {
+              return <DetailPage navigator={navigator} title="detail page" />
+            }
+          }
+        }
+        />)
   }
 }
 
-AppRegistry.registerComponent('OwlNative', () => SampleComponent);
+class HomePage extends Component {
+  handleClick(props) {
+    props.navigator.push({id: 'detail'})
+  }
+  render() {
+    return(
+        <View style={styles.containerView}>
+          <TouchableHighlight onPress={this.handleClick.bind(this, this.props)}>
+            <Text>{this.props.title}</Text>
+          </TouchableHighlight>
+        </View>
+    )
+  }
+}
 
-tsete: w
+class DetailPage extends Component {
+  handleClick(props) {
+    props.navigator.pop()
+  }
+  render() {
+    return(
+        <View style={styles.containerView}>
+          <TouchableHighlight onPress={this.handleClick.bind(this, this.props)}>
+            <Text>{this.props.title}</Text>
+          </TouchableHighlight>
+        </View>
+    )
+  }
+}
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  containerView: {
+   flex: 1,
+   justifyContent: 'center',
+  }
+})
+
+AppRegistry.registerComponent('OwlNative', () => PageNavigator);
